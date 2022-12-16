@@ -1,0 +1,55 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = false
+
+format = """
+$username\
+$hostname\
+$localip\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$hg_branch\
+$docker_context\
+$package\
+$c\
+$cmake\
+$dotnet\
+$golang\
+$java\
+$lua\
+$nodejs\
+$python\
+$rust\
+$conda\
+$meson\
+$spack\
+$env_var\
+$custom\
+$sudo\
+$line_break\
+$jobs\
+$time\
+$status\
+$shell\
+$character"""
+
+right_format = """
+$cmd_duration\
+"""
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+
+[line_break]
+disabled = true
+
+[custom.toolbox]
+command = "sed -rn 's/name=\"(.*)\"/\\1/p' /run/.containerenv" # shows output of command
+detect_files = ["/run/.containerenv"] # can specify filters but wildcards are not supported
+when = "test -f /run/.containerenv"
+format = "in [$output ](bold yellow)"
