@@ -1,54 +1,61 @@
-local nnoremap = require("user.keymap").nnoremap
-local lsps = {
-	"sumneko_lua",
+local ok, lspconfig = pcall(require, "lspconfig")
+if not ok then
+    return
+end
+
+local on_attach = function(_, bufnr)
+    -- vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+    local nnoremap = function(lhs, rhs, desc)
+        require("user.keymap").nnoremap(
+            lhs,
+            rhs,
+            { buffer = bufnr, desc = desc }
+        )
+    end
+
+    nnoremap("gD", vim.lsp.buf.declaration, "goto definition")
+    nnoremap("gd", vim.lsp.buf.definition, "goto declaration")
+    nnoremap("K", vim.lsp.buf.hover, "hover")
+    nnoremap("gi", vim.lsp.buf.implementation, "goto implementation")
+    nnoremap("<C-k>", vim.lsp.buf.signature_help, "get signature help")
+    nnoremap("<space>D", vim.lsp.buf.type_definition, "")
+    nnoremap("<space>rn", vim.lsp.buf.rename, "rename")
+    nnoremap("<space>ca", vim.lsp.buf.code_action, "get code action")
+    nnoremap("gr", vim.lsp.buf.references, "get references")
+    nnoremap("<space>f", function()
+        vim.lsp.buf.format({ async = true })
+    end, "format file")
+end
+
+local servers = {
+    "sumneko_lua",
 }
 
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installed = lsps,
+    ensure_installed = servers,
 })
 
-local ok, lspconfig = pcall(require, "lspconfig")
-if not ok then
-	return
-end
-local on_attach = function()
-	-- Enable completion triggered by <c-x><c-o>
-	-- vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-	-- Mappings.
-	-- See `:help vim.lsp.*` for documentation on any of the below functions
-	nnoremap("gD", vim.lsp.buf.declaration, { buffer = 0 })
-	nnoremap("gd", vim.lsp.buf.definition, { buffer = 0 })
-	nnoremap("K", vim.lsp.buf.hover, { buffer = 0 })
-	nnoremap("gi", vim.lsp.buf.implementation, { buffer = 0 })
-	nnoremap("<C-k>", vim.lsp.buf.signature_help, { buffer = 0 })
-	nnoremap("<space>wa", vim.lsp.buf.add_workspace_folder, { buffer = 0 })
-	nnoremap("<space>wr", vim.lsp.buf.remove_workspace_folder, { buffer = 0 })
-	nnoremap("<space>wl", function()
-		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-	end, { buffer = 0 })
-	nnoremap("<space>D", vim.lsp.buf.type_definition, { buffer = 0 })
-	nnoremap("<space>rn", vim.lsp.buf.rename, { buffer = 0 })
-	nnoremap("<space>ca", vim.lsp.buf.code_action, { buffer = 0 })
-	nnoremap("gr", vim.lsp.buf.references, { buffer = 0 })
-	nnoremap("<space>f", function()
-		vim.lsp.buf.format({ async = true })
-	end, { buffer = 0 })
+for _, lsp in pairs(servers) do
+    lspconfig[lsp].setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+    })
 end
-local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-for _, lsp in pairs(lsps) do
-	lspconfig[lsp].setup({
-		on_attach = on_attach,
-		capabilities = capabilities,
-		settings = {
-			Lua = {
-				diagnostics = {
-					globals = {
-						"vim",
-					},
-				},
-			},
-		},
-	})
-end
+
+lspconfig.sumneko_lua.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = {
+                    "vim",
+                },
+            },
+        },
+    },
+})

@@ -33,3 +33,5 @@ vim.opt.scrolloff = 8
 vim.opt.clipboard = "unnamedplus"
 
 vim.opt.signcolumn = "yes"
+
+vim.g.mapleader = " "
