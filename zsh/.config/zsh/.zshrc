@@ -11,6 +11,8 @@ plug "zsh-users/zsh-history-substring-search"
 
 plug "zsh-users/zsh-completions"
 
+bundle "$HOME/Repos/zshp"
+
 fpath=("$HOME/.local/share/zap/plugins/zsh-completions/src" $fpath)
 
 bindkey '^[[A' history-substring-search-up
