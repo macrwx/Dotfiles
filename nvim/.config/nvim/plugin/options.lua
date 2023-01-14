@@ -29,5 +29,3 @@ vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = "80"
 
 vim.opt.cursorline = true
-
-vim.g.mapleader = " "

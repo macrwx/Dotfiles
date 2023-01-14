@@ -29,6 +29,8 @@ end
 
 local servers = {
     "sumneko_lua",
+    "clangd",
+    "cmake"
 }
 
 require("mason").setup()
