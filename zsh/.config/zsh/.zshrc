@@ -1,23 +1,15 @@
-[ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
+[ -f "$XDG_DATA_HOME/zap/zap.zsh" ] && source "$XDG_DATA_HOME/zap/zap.zsh"
 
-HISTFILE="$HOME/.local/share/zsh/zsh-history"
+zstyle ":completion" use-xdg-dirs 'yes'
+zstyle ":history" use-xdg-dirs 'yes'
 
-eval "$(starship init zsh)"
+for plugin in $ZDOTDIR/plugins/*; do
+  source $plugin
+done
 
-plug "zap-zsh/supercharge"
 plug "zsh-users/zsh-autosuggestions"
 plug "zsh-users/zsh-syntax-highlighting"
 plug "zsh-users/zsh-history-substring-search"
-
 plug "zsh-users/zsh-completions"
 
-bundle "$HOME/Repos/zshp"
-
-fpath=("$HOME/.local/share/zap/plugins/zsh-completions/src" $fpath)
-
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+eval "$(starship init zsh)"
