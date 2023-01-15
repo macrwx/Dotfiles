@@ -1,4 +1,4 @@
-if zstyle -T ':completion' use-xdg-dirs; then
+if zstyle -T ":completion" use-xdg-dirs; then
   _cache_dir=${XDG_CACHE_HOME:-$HOME/.cache}/zsh
   [[ -d "$_cache_dir" ]] || mkdir -p "$_cache_dir"
 
@@ -15,8 +15,8 @@ setopt AUTO_MENU          # Show completion menu on <TAB> press.
 setopt MENU_COMPLETE
 setopt EXTENDED_GLOB
 
-zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path "$_zcompcache"
+zstyle ":completion::complete:*" use-cache on
+zstyle ":completion::complete:*" cache-path "$_zcompcache"
 
 autoload -Uz compinit
 _comp_files=($_zcompdump(Nmh-20))
