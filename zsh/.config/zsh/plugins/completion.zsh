@@ -11,7 +11,6 @@ fi
 
 setopt AUTO_LIST          # Automatically list choices on an ambiguous completion. 
 setopt ALWAYS_TO_END      # Move cursor to the end of completed word.
-setopt AUTO_MENU          # Show completion menu on <TAB> press.
 setopt MENU_COMPLETE
 setopt EXTENDED_GLOB
 
