@@ -2,9 +2,9 @@ if zstyle -T ":history" use-xdg-dirs; then
   _data_dir=${XDG_DATA_HOME:-$HOME/.local/share}/zsh
   [[ -d "$_data_dir" ]] || mkdir -p "$_data_dir"
 
-  _history="$_data_dir/history"
+  _history="$_data_dir/zhistory"
 else
-  _history="${ZDOTDIR:-$HOME}/history"
+  _history="${ZDOTDIR:-$HOME}/.zhistory"
 fi
 
 HISTFILE="$_history"
