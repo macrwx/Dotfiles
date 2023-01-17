@@ -12,7 +12,7 @@ plug "zsh-users/zsh-syntax-highlighting"
 plug "zsh-users/zsh-history-substring-search"
 plug "zsh-users/zsh-completions"
 
-setopt nobeep
+setopt NOBEEP
 
 alias ls="exa --group-directories-first --icons"
 alias ll="ls -lh"
