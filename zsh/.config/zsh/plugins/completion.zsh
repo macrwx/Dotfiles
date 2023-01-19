@@ -14,7 +14,7 @@ zstyle ":completion::complete:*" cache-path "$_zcompcache"
 zstyle ':completion:*' menu yes select
 
 autoload -Uz compinit
-_comp_files=($_zcompdump(Nmh-20))
+_comp_files=($_zcompdump(Nmh+20))
 if (( $#_comp_files )); then
   compinit -i -C -d "$_zcompdump"
 else

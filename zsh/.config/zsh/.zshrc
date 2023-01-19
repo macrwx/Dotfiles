@@ -18,5 +18,6 @@ alias ls="exa --group-directories-first --icons"
 alias ll="ls -lh"
 alias la="ll -a"
 alias tree="ll --tree --level=2"
+alias cat="bat"
 
 eval "$(starship init zsh)"
