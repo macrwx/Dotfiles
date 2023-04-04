@@ -1,0 +1,3 @@
+[submodule "astronvim/.config/astronvim/lua/user/astronvim"]
+	path = astronvim/.config/astronvim/lua/user/astronvim
+	url = https://github.com/macrwx/astronvim.git

@@ -6,6 +6,6 @@ bold_italic_font    Iosevka Bold Italic Nerd Font Complete
 font_size 14
 
 # BEGIN_KITTY_THEME
-# Catppuccin-Frappe
+# GitHub Dark
 include current-theme.conf
 # END_KITTY_THEME
